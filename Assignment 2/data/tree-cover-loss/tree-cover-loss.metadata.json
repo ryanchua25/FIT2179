@@ -1,0 +1,37 @@
+{
+  "chart": {
+    "title": "Tree cover loss",
+    "subtitle": "Estimated area of tree cover loss. Tree cover loss is the temporary or permanent loss of vegetation greater than five meters in height.",
+    "note": "Improvements in the detection of tree cover loss due to the incorporation of new satellite data and methodology changes between 2011 and 2015 may result in higher estimates of loss in recent years compared to earlier years.",
+    "citation": "Global Forest Watch (2025)",
+    "originalChartUrl": "https://ourworldindata.org/grapher/tree-cover-loss?v=1&csvType=full&useColumnShortNames=false",
+    "selection": [
+      "Africa",
+      "Asia",
+      "North America",
+      "South America",
+      "Europe",
+      "Oceania"
+    ]
+  },
+  "columns": {
+    "Tree cover loss driven by all causes": {
+      "titleShort": "Total",
+      "titleLong": "Total",
+      "descriptionShort": "Tree cover loss driven by all causes.",
+      "shortUnit": "ha",
+      "unit": "hectares",
+      "timespan": "2001-2024",
+      "type": "Numeric",
+      "owidVariableId": 1104663,
+      "shortName": "tree_cover_loss_ha__category_total",
+      "lastUpdated": "2025-08-26",
+      "nextUpdate": "2026-08-26",
+      "citationShort": "Global Forest Watch (2025) – with major processing by Our World in Data",
+      "citationLong": "Global Forest Watch (2025) – with major processing by Our World in Data. “Total” [dataset]. Global Forest Watch, “Tree Cover Loss by Dominant Driver” [original data].",
+      "fullMetadata": "https://api.ourworldindata.org/v1/indicators/1104663.metadata.json"
+    }
+  },
+  "dateDownloaded": "2026-05-16",
+  "activeFilters": {}
+}
