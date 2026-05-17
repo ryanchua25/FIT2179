@@ -1,2 +1,10 @@
-Name,Mammals,Birds,Reptiles*,Amphibians,Fishes*,Molluscs*,Other Inverts*,Plants*,Fungi*,Chromists*,Total
-Malaysia,81,70,59,41,188,50,338,"1,543",9,0,"2,379"
+Group,Threatened_Species
+Plants,1543
+Other Invertebrates,338
+Fishes,188
+Mammals,81
+Birds,70
+Reptiles,59
+Molluscs,50
+Amphibians,41
+Fungi,9
