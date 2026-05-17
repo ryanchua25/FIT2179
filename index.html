@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Vulnerable Wildlife: Are We Doing Enough to Preserve Malaysia's Ecosystem?</title>
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Source+Sans+3:wght@300;400;600&display=swap" rel="stylesheet" />
+
+  <!-- External CSS -->
+  <link rel="stylesheet" href="style.css" />
+
+  <!-- Vega-Lite -->
+  <script src="https://cdn.jsdelivr.net/npm/vega@5"></script>
+  <script src="https://cdn.jsdelivr.net/npm/vega-lite@5"></script>
+  <script src="https://cdn.jsdelivr.net/npm/vega-embed@6"></script>
+</head>
+
+<body>
+
+  <!-- ═══════════════════════════════════════
+       HERO
+  ════════════════════════════════════════ -->
+  <header class="hero">
+    <p class="hero-label">Malaysia · Wildlife &amp; Conservation</p>
+    <h1>Vulnerable Wildlife:<br /><span>Are We Doing Enough</span> to Preserve Malaysia's Ecosystem?</h1>
+    <p class="hero-sub">
+      Malaysia is one of the world's most biodiverse nations — yet its forests are disappearing
+      and its wildlife is under threat. This is a story about what is being lost, and whether
+      enough is being done to stop it.
+    </p>
+    <p class="hero-meta">FIT2179 Data Visualisation 2 · Ryan Chua · 2026</p>
+  </header>
+
+
+  <!-- ═══════════════════════════════════════
+       STAT STRIP
+  ════════════════════════════════════════ -->
+  <div class="stat-strip">
+    <div class="stat-strip-inner">
+      <div class="stat-card">
+        <span class="stat-number">&lt; 150</span>
+        <p class="stat-label">Malayan tigers left in the wild</p>
+      </div>
+      <div class="stat-card">
+        <span class="stat-number">0</span>
+        <p class="stat-label">Sumatran rhinos remaining in Malaysia</p>
+      </div>
+      <div class="stat-card">
+        <span class="stat-number">686</span>
+        <p class="stat-label">Threatened species in Malaysia (IUCN, 2024)</p>
+      </div>
+      <div class="stat-card">
+        <span class="stat-number">RM 517M</span>
+        <p class="stat-label">Conservation funds disbursed 2019–2024</p>
+      </div>
+    </div>
+  </div>
+
+
+  <div class="page">
+
+    <!-- ═══════════════════════════════════════
+         SECTION 1 — THE THREAT: FOREST LOSS
+    ════════════════════════════════════════ -->
+    <section class="section">
+      <p class="section-tag">Section 1 · The Threat</p>
+      <h2>Malaysia's Forests Are Disappearing</h2>
+      <p class="section-intro">
+        Forests are the foundation of Malaysia's biodiversity. But decades of logging, agriculture,
+        and development have taken a severe toll. Here is how much has been lost — and what is driving it.
+      </p>
+
+      <div class="chart-box chart-full">
+        <p class="chart-title">Tree Cover Loss in Malaysia, 2001–2024</p>
+        <p class="chart-caption">Annual hectares of tree cover lost nationally. Source: Global Forest Watch.</p>
+        <div id="chart_forest_trend"></div>
+      </div>
+
+      <div class="chart-row chart-row-2">
+        <div class="chart-box">
+          <p class="chart-title">Loss by Dominant Driver</p>
+          <p class="chart-caption">What is causing deforestation? Palm oil, logging, and shifting agriculture are the main culprits. Source: Global Forest Watch / Our World in Data.</p>
+          <div id="chart_driver"></div>
+        </div>
+        <div class="chart-box">
+          <p class="chart-title">Malaysia vs. ASEAN: Forest Cover Remaining</p>
+          <p class="chart-caption">How does Malaysia compare to its neighbours in preserving forest cover? Source: World Bank.</p>
+          <div id="chart_asean"></div>
+        </div>
+      </div>
+    </section>
+
+
+    <!-- ═══════════════════════════════════════
+         SECTION 2 — WHERE: STATE MAP
+    ════════════════════════════════════════ -->
+    <section class="section">
+      <p class="section-tag">Section 2 · Where</p>
+      <h2>Which States Are Losing the Most Forest?</h2>
+      <p class="section-intro">
+        Forest loss is not evenly distributed. Sabah and Sarawak — Malaysia's Bornean states —
+        bear the heaviest burden, while Peninsular states face mounting pressure too.
+      </p>
+
+      <div class="chart-box chart-full">
+        <p class="chart-title">Cumulative Tree Cover Loss by Malaysian State, 2001–2024</p>
+        <p class="chart-caption">Hover over a state to see total hectares lost. Federal territories excluded due to negligible forest cover. Source: Global Forest Watch.</p>
+        <div id="chart_map"></div>
+      </div>
+
+      <div class="chart-box chart-full">
+        <p class="chart-title">States Ranked by Total Forest Loss</p>
+        <p class="chart-caption">A clearer look at which states have lost the most tree cover over the past two decades. Source: Global Forest Watch.</p>
+        <div id="chart_state_bar"></div>
+      </div>
+    </section>
+
+
+    <!-- ═══════════════════════════════════════
+         SECTION 3 — WHAT IS AT STAKE: SPECIES
+    ════════════════════════════════════════ -->
+    <section class="section">
+      <p class="section-tag">Section 3 · What Is at Stake</p>
+      <h2>The Wildlife Paying the Price</h2>
+      <p class="section-intro">
+        Habitat loss directly threatens Malaysia's extraordinary biodiversity. The IUCN Red List
+        tracks species by their risk of extinction — and Malaysia's numbers are alarming.
+      </p>
+
+      <div class="chart-row chart-row-2">
+        <div class="chart-box">
+          <p class="chart-title">Threatened Species by Animal Group</p>
+          <p class="chart-caption">Number of Critically Endangered, Endangered, and Vulnerable species in Malaysia by group. Source: IUCN Red List, 2024.</p>
+          <div id="chart_species_group"></div>
+        </div>
+        <div class="chart-box">
+          <p class="chart-title">Malaysia vs. ASEAN: Threatened Species Count</p>
+          <p class="chart-caption">How Malaysia compares to neighbouring countries in total threatened species. Source: IUCN Red List, 2024.</p>
+          <div id="chart_species_asean"></div>
+        </div>
+      </div>
+
+      <div class="callout">
+        <strong>Did you know?</strong> The Sumatran rhinoceros was declared <strong>functionally extinct in Malaysia</strong>
+        in 2019 after the last known  ividual, Iman, passed away in Sabah. Malaysia now has zero rhinos remaining in the wild.
+      </div>
+    </section>
+
+
+    <!-- ═══════════════════════════════════════
+         SECTION 4 — ARE WE DOING ENOUGH?
+    ════════════════════════════════════════ -->
+    <section class="section">
+      <p class="section-tag">Section 4 · The Response</p>
+      <h2>Are We Doing Enough?</h2>
+      <p class="section-intro">
+        Malaysia has made commitments to conservation — including the Ecological Fiscal Transfer (EFT),
+        which channels government funds to states for biodiversity protection. But how much is actually
+        being spent, and is it working?
+      </p>
+
+      <div class="chart-box chart-full">
+        <p class="chart-title">Malaysia's Conservation Budget (EFT) vs. What Is Needed, 2019–2025</p>
+        <p class="chart-caption">Annual EFT allocation in RM million. The dashed line shows the RM 1 billion target called for by conservationists including WWF-Malaysia. Source: MOF, Bernama; target: WWF-Malaysia / Macaranga, 2025.</p>
+        <div id="chart_eft_year"></div>
+      </div>
+
+      <div class="chart-box chart-full">
+        <p class="chart-title">Where Did the Money Go? EFT Spending Accountability</p>
+        <p class="chart-caption">Of RM 517 million disbursed between 2019–2024, only RM 25 million across four states had documented spending outcomes. Source: Ministry of Natural Resources and Environmental Sustainability, via Macaranga, 2025.</p>
+        <div id="chart_eft_spending"></div>
+      </div>
+
+      <div class="chart-box chart-full">
+        <p class="chart-title">Protected Land Area in Malaysia Over Time</p>
+        <p class="chart-caption">Percentage of Malaysia's total land area under formal protection. Source: World Bank / WDPA.</p>
+        <div id="chart_protected"></div>
+      </div>
+    </section>
+
+
+    <!-- ═══════════════════════════════════════
+         SECTION 5 — THE BIGGER PICTURE
+    ════════════════════════════════════════ -->
+    <section class="section">
+      <p class="section-tag">Section 5 · The Bigger Picture</p>
+      <h2>Forest Loss vs. Conservation Funding: A State-by-State View</h2>
+      <p class="section-intro">
+        Are the states losing the most forest receiving the most conservation funding?
+        This scatter plot shows whether EFT allocations align with where they are needed most.
+      </p>
+
+      <div class="chart-box chart-full">
+        <p class="chart-title">Forest Loss vs. EFT Funding by State</p>
+        <p class="chart-caption">Each circle represents one Malaysian state. Hover to explore. Source: Global Forest Watch + Macaranga / NRES, 2025.</p>
+        <div id="chart_scatter"></div>
+      </div>
+
+      <div class="callout">
+        <strong>The accountability gap.</strong> Macaranga's 2025 investigation found that of RM 517 million
+        disbursed since 2019, the vast majority had <strong>no public documentation</strong> of how the funds were spent.
+        Only four states — Johor, Sabah, Pahang, and Kelantan — provided any spending breakdown at all.
+      </div>
+    </section>
+
+  </div><!-- end .page -->
+
+
+  <!-- ═══════════════════════════════════════
+       FOOTER
+  ════════════════════════════════════════ -->
+  <footer>
+    <p><strong>Vulnerable Wildlife: Are We Doing Enough to Preserve Malaysia's Ecosystem?</strong></p>
+    <p>Created by Ryan Chua · FIT2179 Data Visualisation 2 · Monash University Malaysia · 2026</p>
+    <p style="margin-top: 12px;">
+      <strong>Data sources:</strong>
+      Global Forest Watch · IUCN Red List ·
+      Ministry of Finance Malaysia (MOF) · Bernama ·
+      World Bank · <a href="https://macaranga.org" target="_blank">Macaranga</a> ·
+      WWF-Malaysia
+    </p>
+    <p style="margin-top: 8px;">
+      AI tools used for grammar and code assistance. All data, analysis, and visualisations are the author's own work.
+    </p>
+  </footer>
+
+
+  <!-- ═══════════════════════════════════════
+       VEGA-LITE EMBEDS
+  ════════════════════════════════════════ -->
+  <script>
+    function embed(id, spec) {
+      vegaEmbed("#" + id, spec, { actions: false }).catch(console.error);
+    }
+
+    embed("chart_forest_trend", {
+      "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+      "data": { "url": "data/tree_cover_loss.csv" },
+      "mark": "line",
+      "encoding": {
+        "x": { "field": "year", "type": "ordinal", "title": "Year" },
+        "y": { "field": "umd_tree_cover_loss__ha", "type": "quantitative", "title": "Tree Cover Lost (ha)" }
+      },
+      "width": "container", "height": 280
+    });
+
+    embed("chart_state_bar", {
+      "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+      "data": { "url": "data/treecover_loss_by_state.csv" },
+      "transform": [
+        { "aggregate": [{ "op": "sum", "field": "umd_tree_cover_loss__ha", "as": "total_loss" }], "groupby": ["State"] },
+        { "filter": "datum.State !== 'Kuala Lumpur' && datum.State !== 'Putrajaya' && datum.State !== 'Labuan'" }
+      ],
+      "mark": "bar",
+      "encoding": {
+        "x": { "field": "total_loss", "type": "quantitative", "title": "Total Tree Cover Lost (ha)" },
+        "y": { "field": "State", "type": "nominal", "sort": "-x" },
+        "color": { "value": "#2d6a4f" }
+      },
+      "width": "container", "height": 320
+    });
+
+    embed("chart_eft_year", {
+      "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+      "data": { "url": "data/EFT_year.csv" },
+      "mark": "bar",
+      "encoding": {
+        "x": { "field": "year", "type": "ordinal", "title": "Year" },
+        "y": { "field": "allocation_rm_million", "type": "quantitative", "title": "Allocation (RM million)" },
+        "color": { "value": "#2d6a4f" }
+      },
+      "width": "container", "height": 260
+    });
+
+    embed("chart_eft_spending", {
+      "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+      "data": { "url": "data/EFT_spending.csv" },
+      "mark": "arc",
+      "encoding": {
+        "theta": { "field": "amount_rm_million", "type": "quantitative" },
+        "color": { "field": "category", "type": "nominal" }
+      },
+      "width": "container", "height": 260
+    });
+  </script>
+
+</body>
+</html>
