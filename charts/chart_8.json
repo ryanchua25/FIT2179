@@ -1,0 +1,39 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "width": 300,
+  "height": 300,
+  "title": "EFT Spending Accountability, 2019–2024",
+  "data": {
+    "url": "https://raw.githubusercontent.com/ryanchua25/FIT2179/main/data/EFT_spending.csv"
+  },
+  "params": [
+    {
+      "name": "spending_select",
+      "select": {"type": "point", "fields": ["documented spending category"]},
+      "bind": "legend"
+    }
+  ],
+  "mark": {"type": "arc"},
+  "encoding": {
+    "theta": {
+      "field": "EFT funding spent (RM, Million)",
+      "type": "quantitative"
+    },
+    "color": {
+      "field": "documented spending category",
+      "type": "nominal",
+      "title": "Category",
+      "scale": {
+        "scheme": "accent"
+      }
+    },
+    "opacity": {
+      "condition": {"param": "spending_select", "value": 1},
+      "value": 0.2
+    },
+    "tooltip": [
+      {"field": "documented spending category", "type": "nominal", "title": "Category"},
+      {"field": "EFT funding spent (RM, Million)", "type": "quantitative", "title": "Amount (RM million)"}
+    ]
+  }
+}

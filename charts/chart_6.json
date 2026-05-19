@@ -1,0 +1,39 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "width": 300,
+  "height": 300,
+  "title": "Threatened Species in Malaysia",
+  "data": {
+    "url": "https://raw.githubusercontent.com/ryanchua25/FIT2179/main/data/endangered_species.csv"
+  },
+  "params": [
+    {
+      "name": "group_select",
+      "select": {"type": "point", "encodings": ["color"]},
+      "bind": "legend"
+    }
+  ],
+  "mark": {"type": "arc", "innerRadius": 80},
+  "encoding": {
+    "theta": {
+      "field": "Threatened_Species",
+      "type": "quantitative"
+    },
+    "color": {
+      "field": "Group",
+      "type": "nominal",
+      "title": "Group",
+      "scale": {
+        "scheme":"tableau10"
+      }
+    },
+    "opacity": {
+      "condition": {"param": "group_select", "value": 1},
+      "value": 0.5
+    },
+    "tooltip": [
+      {"field": "Group", "type": "nominal", "title": "Group"},
+      {"field": "Threatened_Species", "type": "quantitative", "title": "Threatened Species"}
+    ]
+  }
+}

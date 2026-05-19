@@ -1,0 +1,39 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "width": 600,
+  "height": 400,
+  "title": "Total Tree Cover Loss by Malaysian State, 2001–2024",
+  "projection": {"type": "mercator"},
+  "data": {
+    "url": "https://raw.githubusercontent.com/ryanchua25/FIT2179/main/data/Malaysia-state.json",
+    "format": {
+      "type": "topojson",
+      "feature": "geoBoundaries-MYS-ADM1"
+    }
+  },
+  "transform": [
+    {
+      "lookup": "properties.shapeName",
+      "from": {
+        "data": {
+          "url": "https://raw.githubusercontent.com/ryanchua25/FIT2179/main/data/tree_cover_loss_by_state.csv"
+        },
+        "key": "State",
+        "fields": ["total_loss_ha"]
+      }
+    }
+  ],
+  "mark": {"type": "geoshape", "stroke": "white", "strokeWidth": 0.5},
+  "encoding": {
+    "color": {
+      "field": "total_loss_ha",
+      "type": "quantitative",
+      "title": "Total Loss (ha)",
+      "scale": {"scheme": "reds"}
+    },
+    "tooltip": [
+      {"field": "properties.shapeName", "type": "nominal", "title": "State"},
+      {"field": "total_loss_ha", "type": "quantitative", "title": "Total Loss (ha)"}
+    ]
+  }
+}

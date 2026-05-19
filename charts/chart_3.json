@@ -1,0 +1,32 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "width": "container",
+  "height": 300,
+  "title": "Malaysia vs. ASEAN: Forest Cover Remaining",
+  "data": {
+    "url": "https://raw.githubusercontent.com/ryanchua25/FIT2179/main/data/asean_forest_coverage.csv"
+  },
+  "mark": "bar",
+  "encoding": {
+    "x": {
+      "field": "Forest_pct",
+      "type": "quantitative",
+      "title": "Forest Area (% of land)",
+      "scale": {"domain": [0, 100]}
+    },
+    "y": {
+      "field": "Country",
+      "type": "nominal",
+      "sort": "-x",
+      "title": null
+    },
+    "color": {
+      "condition": {"test": "datum.Country === 'Malaysia'", "value": "red"},
+      "value": "pink"
+    },
+    "tooltip": [
+      {"field": "Country", "type": "nominal"},
+      {"field": "Forest_pct", "type": "quantitative", "title": "Forest Cover (%)", "format": ".1f"}
+    ]
+  }
+}

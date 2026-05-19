@@ -1,0 +1,34 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "width": "container",
+  "height": 320,
+  "title": "Malaysian States Ranked by Total Tree Cover Loss, 2001–2024",
+  "data": {
+    "url": "https://raw.githubusercontent.com/ryanchua25/FIT2179/main/data/tree_cover_loss_by_state.csv"
+  },
+  "mark": "bar",
+  "encoding": {
+    "x": {
+      "field": "total_loss_ha",
+      "type": "quantitative",
+      "title": "Total Tree Cover Lost (hectares)"
+    },
+    "y": {
+      "field": "State",
+      "type": "nominal",
+      "title": null,
+      "sort": "-x"
+    },
+    "color": {
+      "condition": {
+        "test": "datum.State === 'Sabah' || datum.State === 'Sarawak'",
+        "value": "red"
+      },
+      "value": "pink"
+    },
+    "tooltip": [
+      {"field": "State", "type": "nominal", "title": "State"},
+      {"field": "total_loss_ha", "type": "quantitative", "title": "Total Loss (ha)"}
+    ]
+  }
+}
