@@ -1,150 +1,106 @@
 {
   "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
-  "width": 360,
-  "height": 360,
+  "width": "container",
+  "height": 220,
   "title": "EFT Spending Accountability, 2019–2024",
   "data": {
-    "url": "https://raw.githubusercontent.com/ryanchua25/FIT2179/main/data/EFT_spending.csv"
+    "sequence": {
+      "start": 0,
+      "stop": 100,
+      "step": 1,
+      "as": "square_id"
+    }
   },
   "transform": [
     {
-      "calculate": "toNumber(datum['EFT funding spent (RM, Million)'])",
-      "as": "amount"
+      "calculate": "datum.square_id % 20",
+      "as": "col"
     },
     {
-      "joinaggregate": [
-        {
-          "op": "sum",
-          "field": "amount",
-          "as": "total_funding"
-        }
-      ]
+      "calculate": "floor(datum.square_id / 20)",
+      "as": "row"
     },
     {
-      "calculate": "datum.amount / datum.total_funding",
-      "as": "percentage"
+      "calculate": "datum.square_id < 95 ? 'No public record' : datum.square_id < 97 ? 'Johor' : datum.square_id < 98 ? 'Sabah' : datum.square_id < 99 ? 'Pahang' : 'Kelantan'",
+      "as": "category"
     },
     {
-      "calculate": "format(datum.percentage, '.0%')",
-      "as": "percentage_label"
-    },
-    {
-      "calculate": "datum['documented spending category'] === 'Unknown' ? datum.percentage_label : ''",
-      "as": "main_label"
+      "calculate": "datum.category === 'No public record' ? 'RM 492M, about 95% of total funding' : datum.category === 'Johor' ? 'RM 12M documented' : datum.category === 'Sabah' ? 'RM 6.8M documented' : datum.category === 'Pahang' ? 'RM 4M documented' : 'RM 2.2M documented'",
+      "as": "amount_label"
     }
   ],
-  "layer": [
-    {
-      "mark": {
-        "type": "arc",
-        "innerRadius": 80,
-        "outerRadius": 125
-      },
-      "encoding": {
-        "theta": {
-          "field": "amount",
-          "type": "quantitative"
-        },
-        "color": {
-          "field": "documented spending category",
-          "type": "nominal",
-          "title": "Category",
-          "scale": {
-            "domain": [
-              "Unknown",
-              "Johor",
-              "Sabah",
-              "Pahang",
-              "Kelantan"
-            ],
-            "range": [
-              "#6A51A3",
-              "#9E9AC8",
-              "#D8B365",
-              "#5AB4AC",
-              "#BDBDBD"
-            ]
-          }
-        },
-        "tooltip": [
-          {
-            "field": "documented spending category",
-            "type": "nominal",
-            "title": "Category"
-          },
-          {
-            "field": "amount",
-            "type": "quantitative",
-            "title": "Amount (RM million)",
-            "format": ".1f"
-          },
-          {
-            "field": "percentage",
-            "type": "quantitative",
-            "title": "Share of total",
-            "format": ".1%"
-          }
+  "mark": {
+    "type": "rect",
+    "stroke": "white",
+    "strokeWidth": 1.2,
+    "cornerRadius": 2
+  },
+  "encoding": {
+    "x": {
+      "field": "col",
+      "type": "ordinal",
+      "axis": null,
+      "scale": {
+        "paddingInner": 0,
+        "paddingOuter": 0
+      }
+    },
+    "y": {
+      "field": "row",
+      "type": "ordinal",
+      "axis": null,
+      "scale": {
+        "paddingInner": 0,
+        "paddingOuter": 0
+      }
+    },
+    "color": {
+      "field": "category",
+      "type": "nominal",
+      "title": "Category",
+      "scale": {
+        "domain": [
+          "No public record",
+          "Johor",
+          "Sabah",
+          "Pahang",
+          "Kelantan"
+        ],
+        "range": [
+          "#E8E8E8",
+          "#6A51A3",
+          "#5AB4AC",
+          "#D8B365",
+          "#9E9AC8"
         ]
+      },
+      "legend": {
+        "orient": "bottom",
+        "columns": 3,
+        "titleFontSize": 12,
+        "labelFontSize": 11,
+        "symbolType": "square"
       }
     },
-    {
-      "mark": {
-        "type": "text",
-        "radius": 148,
-        "fontSize": 13,
-        "fontWeight": "bold",
-        "color": "black"
+    "tooltip": [
+      {
+        "field": "category",
+        "type": "nominal",
+        "title": "Category"
       },
-      "encoding": {
-        "theta": {
-          "field": "amount",
-          "type": "quantitative"
-        },
-        "text": {
-          "field": "main_label",
-          "type": "nominal"
-        }
+      {
+        "field": "amount_label",
+        "type": "nominal",
+        "title": "Amount"
       }
+    ]
+  },
+  "config": {
+    "view": {
+      "stroke": null
     },
-    {
-      "transform": [
-        {
-          "aggregate": [
-            {
-              "op": "sum",
-              "field": "amount",
-              "as": "total_funding"
-            }
-          ]
-        }
-      ],
-      "mark": {
-        "type": "text",
-        "fontSize": 26,
-        "fontWeight": "bold",
-        "color": "black",
-        "dy": -8
-      },
-      "encoding": {
-        "text": {
-          "field": "total_funding",
-          "type": "quantitative",
-          "format": ",.0f"
-        }
-      }
-    },
-    {
-      "mark": {
-        "type": "text",
-        "fontSize": 11,
-        "color": "#555555",
-        "dy": 18
-      },
-      "encoding": {
-        "text": {
-          "value": "RM million total"
-        }
-      }
+    "axis": {
+      "grid": false
     }
-  ]
+  }
 }
