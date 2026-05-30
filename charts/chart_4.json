@@ -2,8 +2,10 @@
   "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
   "width": 600,
   "height": 400,
-  "title": "Total Tree Cover Loss by Malaysian State, 2001–2024",
-  "projection": {"type": "mercator"},
+  "title": "Tree Cover Loss by Malaysian State, Normalised by Land Area",
+  "projection": {
+    "type": "mercator"
+  },
   "data": {
     "url": "https://raw.githubusercontent.com/ryanchua25/FIT2179/main/data/Malaysia-state.json",
     "format": {
@@ -19,21 +21,48 @@
           "url": "https://raw.githubusercontent.com/ryanchua25/FIT2179/main/data/tree_cover_loss_by_state.csv"
         },
         "key": "State",
-        "fields": ["total_loss_ha"]
+        "fields": ["total_loss_ha", "land_area_ha", "loss_pct_land"]
       }
     }
   ],
-  "mark": {"type": "geoshape", "stroke": "white", "strokeWidth": 0.5},
+  "mark": {
+    "type": "geoshape",
+    "stroke": "black",
+    "strokeWidth": 0.6
+  },
   "encoding": {
     "color": {
-      "field": "total_loss_ha",
+      "field": "loss_pct_land",
       "type": "quantitative",
-      "title": "Total Loss (ha)",
-      "scale": {"scheme": "reds"}
+      "title": "Loss (% of land area)",
+      "scale": {
+        "scheme": "blues"
+      }
     },
     "tooltip": [
-      {"field": "properties.shapeName", "type": "nominal", "title": "State"},
-      {"field": "total_loss_ha", "type": "quantitative", "title": "Total Loss (ha)"}
+      {
+        "field": "properties.shapeName",
+        "type": "nominal",
+        "title": "State"
+      },
+      {
+        "field": "total_loss_ha",
+        "type": "quantitative",
+        "title": "Total Loss (ha)",
+        "format": ",.0f"
+      },
+      {
+        "field": "land_area_ha",
+        "type": "quantitative",
+        "title": "Land Area (ha)",
+        "format": ",.0f"
+      },
+      {
+        "field": "loss_pct_land",
+        "type": "quantitative",
+        "title": "Loss (% of land area)",
+        "format": ".1f"
+      }
     ]
   }
 }

@@ -1,39 +1,183 @@
 {
   "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
-  "width": 300,
-  "height": 300,
+  "width": 360,
+  "height": 360,
   "title": "Threatened Species in Malaysia",
   "data": {
     "url": "https://raw.githubusercontent.com/ryanchua25/FIT2179/main/data/endangered_species.csv"
   },
-  "params": [
+  "transform": [
     {
-      "name": "group_select",
-      "select": {"type": "point", "encodings": ["color"]},
-      "bind": "legend"
+      "joinaggregate": [
+        {
+          "op": "sum",
+          "field": "Threatened_Species",
+          "as": "total_species"
+        }
+      ]
+    },
+    {
+      "calculate": "datum.Threatened_Species / datum.total_species",
+      "as": "percentage"
+    },
+    {
+      "calculate": "format(datum.percentage, '.0%')",
+      "as": "percentage_label"
+    },
+    {
+      "calculate": "datum.Threatened_Species >= 188 && datum.Group !== 'Other Invertebrates' ? datum.percentage_label : ''",
+      "as": "top3_label"
+    },
+    {
+      "calculate": "datum.Group === 'Other Invertebrates' ? datum.percentage_label : ''",
+      "as": "invertebrate_label"
     }
   ],
-  "mark": {"type": "arc", "innerRadius": 80},
-  "encoding": {
-    "theta": {
-      "field": "Threatened_Species",
-      "type": "quantitative"
-    },
-    "color": {
-      "field": "Group",
-      "type": "nominal",
-      "title": "Group",
-      "scale": {
-        "scheme":"tableau10"
+  "layer": [
+    {
+      "mark": {
+        "type": "arc",
+        "innerRadius": 80,
+        "outerRadius": 125
+      },
+      "encoding": {
+        "theta": {
+          "field": "Threatened_Species",
+          "type": "quantitative"
+        },
+        "color": {
+          "field": "Group",
+          "type": "nominal",
+          "title": "Group",
+          "scale": {
+            "domain": [
+              "Plants",
+              "Other Invertebrates",
+              "Fishes",
+              "Mammals",
+              "Birds",
+              "Reptiles",
+              "Molluscs",
+              "Amphibians",
+              "Fungi"
+            ],
+            "range": [
+              "#6A51A3",
+              "#9E9AC8",
+              "#D8B365",
+              "#5AB4AC",
+              "#8C6D31",
+              "#80CDC1",
+              "#DFC27D",
+              "#A6CEE3",
+              "#BDBDBD"
+            ]
+          }
+        },
+        "tooltip": [
+          {
+            "field": "Group",
+            "type": "nominal",
+            "title": "Group"
+          },
+          {
+            "field": "Threatened_Species",
+            "type": "quantitative",
+            "title": "Threatened Species"
+          },
+          {
+            "field": "percentage",
+            "type": "quantitative",
+            "title": "Percentage",
+            "format": ".1%"
+          }
+        ]
       }
     },
-    "opacity": {
-      "condition": {"param": "group_select", "value": 1},
-      "value": 0.5
+    {
+      "mark": {
+        "type": "text",
+        "radius": 148,
+        "fontSize": 11,
+        "fontWeight": "bold",
+        "color": "black"
+      },
+      "encoding": {
+        "theta": {
+          "field": "Threatened_Species",
+          "type": "quantitative"
+        },
+        "text": {
+          "field": "top3_label",
+          "type": "nominal"
+        }
+      }
     },
-    "tooltip": [
-      {"field": "Group", "type": "nominal", "title": "Group"},
-      {"field": "Threatened_Species", "type": "quantitative", "title": "Threatened Species"}
-    ]
-  }
+    {
+      "transform": [
+        {
+          "filter": "datum.Group === 'Other Invertebrates'"
+        }
+      ],
+      "mark": {
+        "type": "text",
+        "radius": 142,
+        "dx": 40,
+        "dy": 90,
+        "fontSize": 11,
+        "fontWeight": "bold",
+        "color": "black"
+      },
+      "encoding": {
+        "theta": {
+          "field": "Threatened_Species",
+          "type": "quantitative"
+        },
+        "text": {
+          "field": "invertebrate_label",
+          "type": "nominal"
+        }
+      }
+    },
+    {
+      "transform": [
+        {
+          "aggregate": [
+            {
+              "op": "sum",
+              "field": "Threatened_Species",
+              "as": "total_species"
+            }
+          ]
+        }
+      ],
+      "mark": {
+        "type": "text",
+        "fontSize": 26,
+        "fontWeight": "bold",
+        "color": "black",
+        "dy": -8
+      },
+      "encoding": {
+        "text": {
+          "field": "total_species",
+          "type": "quantitative",
+          "format": ","
+        }
+      }
+    },
+    {
+      "mark": {
+        "type": "text",
+        "fontSize": 11,
+        "color": "#555555",
+        "dy": 18
+      },
+      "encoding": {
+        "text": {
+          "value": "total species"
+        }
+      }
+    }
+  ]
 }

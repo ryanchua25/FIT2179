@@ -21,8 +21,10 @@
       "title": null
     },
     "color": {
-      "condition": {"test": "datum.Country === 'Malaysia'", "value": "red"},
-      "value": "pink"
+      "condition": {
+        "test": "datum.Country === 'Malaysia'",
+        "value": "#E69F00"},
+      "value": "#9ECAE1"
     },
     "tooltip": [
       {"field": "Country", "type": "nominal"},

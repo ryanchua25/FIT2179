@@ -29,3 +29,11 @@ vegaEmbed("#chart_7", chart_7).then(function(result) {
 var chart_8 = "charts/chart_8.json";
 vegaEmbed("#chart_8", chart_8).then(function(result) {
 }).catch(console.error);
+
+var chart_9 = "charts/chart_9.json";
+vegaEmbed("#chart_9", chart_9).then(function(result) {
+}).catch(console.error);
+
+var chart_10 = "charts/chart_10.json";
+vegaEmbed("#chart_10", chart_10).then(function(result) {
+}).catch(console.error);

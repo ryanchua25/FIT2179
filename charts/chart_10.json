@@ -1,0 +1,67 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "width": "container",
+  "height": 300,
+  "title": "Forest Loss vs. EFT Funding by State",
+  "data": {
+    "url": "https://raw.githubusercontent.com/ryanchua25/FIT2179/main/data/EFT_state.csv"
+  },
+  "transform": [
+    {
+      "lookup": "State",
+      "from": {
+        "data": {
+          "url": "https://raw.githubusercontent.com/ryanchua25/FIT2179/main/data/tree_cover_loss_by_state.csv"
+        },
+        "key": "State",
+        "fields": ["total_loss_ha"]
+      }
+    }
+  ],
+  "mark": {
+    "type": "point",
+    "filled": true,
+    "size": 120,
+    "opacity": 0.8
+  },
+  "encoding": {
+    "x": {
+      "field": "total_loss_ha",
+      "type": "quantitative",
+      "title": "Total Tree Cover Loss (ha)",
+      "axis": {
+        "format": "~s"
+      }
+    },
+    "y": {
+      "field": "2019-2024 EFT funds (RM, Million)",
+      "type": "quantitative",
+      "title": "EFT Funds (RM million)"
+    },
+    "color": {
+      "condition": {
+        "test": "datum.State === 'Sabah' || datum.State === 'Sarawak'",
+        "value":"#E69F00"
+      },
+      "value": "#0072B2"
+    },
+    "tooltip": [
+      {
+        "field": "State",
+        "type": "nominal",
+        "title": "State"
+      },
+      {
+        "field": "total_loss_ha",
+        "type": "quantitative",
+        "title": "Tree Cover Loss (ha)",
+        "format": ",.0f"
+      },
+      {
+        "field": "2019-2024 EFT funds (RM, Million)",
+        "type": "quantitative",
+        "title": "EFT Funds (RM million)"
+      }
+    ]
+  }
+}

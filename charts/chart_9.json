@@ -1,0 +1,44 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "width": "container",
+  "height": 300,
+  "title": "Protected Land Area in Malaysia Over Time",
+  "data": {
+    "url": "https://raw.githubusercontent.com/ryanchua25/FIT2179/main/data/protected_area.csv"
+  },
+  "mark": {
+    "type": "area",
+    "line": true,
+    "point": true,
+    "opacity": 0.35,
+    "color": "#74c69d"
+  },
+  "encoding": {
+    "x": {
+      "field": "Year",
+      "type": "ordinal",
+      "title": "Year"
+    },
+    "y": {
+      "field": "Terrestrial protected areas (% of total land area)",
+      "type": "quantitative",
+      "title": "Protected Land Area (%)",
+      "scale": {
+        "domain": [0, 25]
+      }
+    },
+    "tooltip": [
+      {
+        "field": "Year",
+        "type": "ordinal",
+        "title": "Year"
+      },
+      {
+        "field": "Terrestrial protected areas (% of total land area)",
+        "type": "quantitative",
+        "title": "Protected land (%)",
+        "format": ".1f"
+      }
+    ]
+  }
+}

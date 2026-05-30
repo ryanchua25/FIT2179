@@ -17,19 +17,32 @@
   <script src="https://cdn.jsdelivr.net/npm/vega-lite@5"></script>
   <script src="https://cdn.jsdelivr.net/npm/vega-embed@6"></script>
 
-  <script src="vega_lite_vis.js"></script>
+  <script src="vega_lite_vis.js" defer></script>
 
   <title>Vulnerable Wildlife: Are We Doing Enough to Preserve Malaysia's Ecosystem?</title>
   
 </head>
 
 <body>
+  <nav class="top-overhead">
+    <div class="overhead-left">
+      <span class="overhead-title">Wildlife Report</span>
+    </div>
+
+    <div class="overhead-links">
+      <a href="#sec-threat">01 - Threat</a>
+      <a href="#sec-where">02 - Where</a>
+      <a href="#sec-stake">03 - At Stake</a>
+      <a href="#sec-response">04 - Response</a>
+      <a href="#sec-bigger">05 - Bigger Picture</a>
+    </div>
+  </nav>
   <header class="hero">
     <h1>Vulnerable Wildlife:<br /><span>Are We Doing Enough</span> to Preserve Malaysia's Ecosystem?</h1>
     <p class="hero-text">
-      aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-      aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-      aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+      Malaysia is rich in biodiversity, but rising tree cover loss, threatened species counts, </br>
+      and unclear conservation spending raise one question: </br> are protection efforts keeping up
+      with the scale of the damage?
     </p>
   </header>
 
@@ -40,7 +53,7 @@
         <p class="stat-label">Threatened species in Malaysia 2024</p>
       </div>
       <div class="pure-u-1 pure-u-md-1-3 stat-card">
-        <span class="stat-number">35.2%</span>
+        <span class="stat-number">9.5M hectares</span>
         <p class="stat-label">Of Malaysia's forest lost in the since the 2000s</p>
       </div>
       <div class="pure-u-1 pure-u-md-1-3 stat-card">
@@ -53,24 +66,39 @@
   <div class="page">
 
    
-    <section class="section">
-      <h2>Malaysia's Forests Are Disappearing</h2>
+    <section class="section" id="sec-threat">
+      <p class="section-kicker">Section 1 - The Threat</p>
       <p class="section-intro">
-        Forests are the foundation of Malaysia's biodiversity. But decades of logging, agriculture,
-        and development have taken a severe toll. Here is a look at how much has been lost and what is driving it.
+        Forests are the foundation of Malaysia's biodiversity.</br> But decades of logging, agriculture,
+        and development have taken a severe toll.</br> Here is a look at how much has been lost and what is driving it.
       </p>
 
 
       <div class="pure-g">
-        <div class="pure-u-1">
-          <div class="chart-box">
-            <div id="chart_1"></div>
-              <p class="chart-caption">Yearly tree cover loses stayed consistently over 200,000 hectares, whilst Malaysia only has 33million hectares of land</br>
-                In the year 2019, Ecological Fiscal Transfer(2019) was formed to keep this number at bay
-              </p>
-          </div>
+      <div class="pure-u-1 pure-u-md-2-3">
+        <div class="chart-box chart-box-left">
+          <div id="chart_1"></div>
+          <p class="chart-caption">
+            Annual tree cover loss has remained consistently high since 2001.
+            The vertical marker highlights 2019, when Malaysia introduced the Ecological Fiscal Transfer.
+          </p>
         </div>
       </div>
+
+      <div class="pure-u-1 pure-u-md-1-3">
+        <div class="text-box">
+          <h3>Forest loss remains persistent</h3>
+          <p>
+            Malaysia lost millions of hectares of tree cover between 2001 and 2024.
+            Even after conservation funding was introduced in 2019, annual losses remained substantial.
+          </p>
+          <p>
+            This shows that funding alone is not enough unless it is matched with stronger protection,
+            clearer spending records and effective state-level action.
+          </p>
+        </div>
+      </div>
+    </div>
 
 
       <div class="pure-g">
@@ -78,8 +106,8 @@
           <div class="chart-box chart-box-left">
             <div id="chart_2"></div>
             <p class="chart-caption">
-              What is causing deforestation? Agriculture and logging are the main culprits</br>
-              Select driver from the right to see its impact on tree loss
+              Tree cover loss is grouped into two dominant drivers and one combined “Other drivers” category
+              to reduce visual clutter. Select a legend item to isolate each driver.
             </p>
           </div>
         </div>
@@ -92,31 +120,36 @@
       </div>
     </section>
 
-    <section class="section">
-      <h2>Which States Are Losing the Most Forest?</h2>
+    <section class="section" id="sec-where">
+      <p class="section-kicker">Section 2 - Where</p>
       <p class="section-intro">
-        Forest loss is not evenly distributed. Malaysia's Bornean states (Sabah and sarawak)
-        bear the heaviest burden with their vast , while Peninsular states face mounting pressure too.
+        Forest loss is not evenly distributed across Malaysia. Some states show heavier pressure
+        than others, revealing that forest decline is not only concentrated in Borneo but also
+        affects smaller Peninsular states.
       </p>
 
 <div class="pure-g">
   <div class="pure-u-1 pure-u-md-2-3">
     <div class="chart-box chart-box-left">
       <div id="chart_4"></div>
-      <p class="chart-caption">Hover over a state to see total hectares lost. Federal territories excluded due to negligible forest cover.</p>
+        <p class="chart-caption">
+          Darker states show where forest loss affects a larger share of state land.
+          Hover over each state to compare forest pressure across Malaysia.
+        </p>    
+      </div>
     </div>
-  </div>
   <div class="pure-u-1 pure-u-md-1-3">
     <div class="text-box">
-      <h3>Borneo bears the burden</h3>
+      <h3>Smaller states show serious forest pressure</h3>
       <p>
-        Sabah and Sarawak Malaysia's two Bornean states account for 
-        the majority of total forest loss, with Sarawak alone losing over 
-        3.4 million hectares between 2001 and 2024.
-        </br>
-        These states are home to some of the world's oldest and most 
-        biodiverse rainforests, yet they face relentless pressure from 
-        logging, palm oil expansion, and infrastructure development.
+        Sabah and Sarawak still record the largest total forest losses because they cover much
+        larger land areas. However, the map shows that forest pressure is also intense in
+        smaller Peninsular states.
+      </p>
+      <p>
+        Malacca, Johor and Negeri Sembilan stand out because a large share of their land area
+        has been affected by tree cover loss. This shows that Malaysia’s forest issue is not
+        only concentrated in Borneo.
       </p>
     </div>
   </div>
@@ -126,15 +159,17 @@
         <div class="pure-u-1">
           <div class="chart-box">
             <div id="chart_5"></div>
-            <p class="chart-caption">A clearer look at which states have lost the most tree cover over the past two decades</p>
-          </div>
+            <p class="chart-caption">
+              The ranking highlights which states show the highest forest pressure relative to their land area.
+            </p>
+         </div>
         </div>
       </div>
     </section>
 
 
-    <section class="section">
-      <h2>The Wildlife Paying the Price</h2>
+    <section class="section" id="sec-stake">
+      <p class="section-kicker">Section 3 - What Is at Stake</p>
       <p class="section-intro">
         Habitat loss directly threatens Malaysia's extraordinary biodiversity. The IUCN Red List
         tracks species by their risk of extinction, and Malaysia's numbers are alarming.
@@ -164,11 +199,15 @@
           <p class="chart-caption">Number of Critically Endangered, Endangered, and Vulnerable species in Malaysia by group.</p>
         </div>
       </div>
+      <div class="callout callout-warning">
+        Plants form the largest share of threatened species. This shows that
+        biodiversity loss is not only about animals, but entire ecosystems.
+      </div>
     </div>
     </section>
 
-    <section class="section">
-      <h2>Are We Doing Enough?</h2>
+    <section class="section" id="sec-response">
+      <p class="section-kicker">Section 4 - The Response</p>
       <p class="section-intro">
         Malaysia has recently started to make changes with the introduction of the Ecological Fiscal Transfer (EFT),
         which channels government funds to states for biodiversity protection. But how much is actually
@@ -199,12 +238,17 @@
         only RM 25 million across four states Johor, Sabah, 
         Pahang, and Kelantan had any documented spending outcomes.
         </br>
-        The remaining RM 492 million< has no public record 
+        The remaining RM 492 million has no public record 
         of how it was spent, raising serious questions about conservation 
         accountability in Malaysia.
       </p>
     </div>
   </div>
+    <div class="callout callout-warning">
+      <strong>The accountability gap.</strong> Macaranga's 2025 investigation found that of RM 517 million
+      disbursed since 2019,</br> the vast majority had <strong>no public documentation</strong> of how the funds were spent.
+      Only four states Johor, Sabah, Pahang, and Kelantan provided minimal spending breakdown.
+    </div>
 </div>
 
       <div class="pure-g">
@@ -212,16 +256,15 @@
           <div class="chart-box">
             <p class="chart-title">Protected Land Area in Malaysia Over Time</p>
             <p class="chart-caption">Percentage of Malaysia's total land area under formal protection</p>
-            <div id="chart_protected"></div>
+            <div id="chart_9"></div>
           </div>
         </div>
       </div>
     </section>
 
 
-    <section class="section">
-      <h2>Forest Loss vs. Conservation Funding: A State-by-State View</h2>
-      <p class="section-intro">
+    <section class="section" id="sec-bigger">
+      <p class="section-kicker">Section 5 - The Bigger Picture</p>      <p class="section-intro">
         Are the states losing the most forest receiving the most conservation funding?
         This scatter plot shows whether EFT allocations align with where they are needed most.
       </p>
@@ -231,15 +274,15 @@
           <div class="chart-box">
             <p class="chart-title">Forest Loss vs. EFT Funding by State</p>
             <p class="chart-caption">Each circle represents one Malaysian state. Hover to explore</p>
-            <div id="chart_scatter"></div>
+            <div id="chart_10"></div>
           </div>
         </div>
       </div>
-
-      <div class="callout">
-        <strong>The accountability gap.</strong> Macaranga's 2025 investigation found that of RM 517 million
-        disbursed since 2019, the vast majority had <strong>no public documentation</strong> of how the funds were spent.
-        Only four states Johor, Sabah, Pahang, and Kelantan provided minimal spending breakdown.
+      <div class="callout callout-warning">
+        <strong>Funding is necessary, but not enough.</strong>
+        EFT funding should continue because states need financial support for conservation.
+        But the bigger issue is action: funds need to be <strong>clearly tracked</strong>, directed to high-pressure
+        areas, and translated into <strong>real protection</strong> for forests and threatened species.
       </div>
     </section>
 

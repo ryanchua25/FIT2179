@@ -2,65 +2,102 @@
   "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
   "width": "container",
   "height": 300,
-  "title": "Malaysia Tree Cover Loss by Driver",
-  "data": {"url": "https://raw.githubusercontent.com/ryanchua25/FIT2179/main/data/tree_cover_loss_drivers.csv"},
-  "mark": {
-    "type": "area",
-    "interpolate": "monotone"
+  "title": "Malaysia Tree Cover Loss by Main Driver",
+  "data": {
+    "url": "https://raw.githubusercontent.com/ryanchua25/FIT2179/main/data/tree_cover_loss_drivers.csv"
   },
+  "transform": [
+    {
+      "calculate": "datum['loss drivers'] === 'Permanent agriculture' ? 'Permanent agriculture' : datum['loss drivers'] === 'Logging' ? 'Logging' : 'Other drivers'",
+      "as": "driver_group"
+    },
+    {
+      "calculate": "datum.driver_group === 'Permanent agriculture' ? 1 : datum.driver_group === 'Logging' ? 2 : 3",
+      "as": "driver_order"
+    },
+    {
+      "aggregate": [
+        {
+          "op": "sum",
+          "field": "tree_cover_loss_ha",
+          "as": "total_loss_ha"
+        }
+      ],
+      "groupby": ["year", "driver_group", "driver_order"]
+    }
+  ],
   "params": [
     {
       "name": "driver",
       "select": {
         "type": "point",
-        "fields": ["loss drivers"]
+        "fields": ["driver_group"]
       },
       "bind": "legend"
     }
   ],
-"encoding": {
-  "x": {
-    "field": "year",
-    "type": "ordinal",
-    "title": "Year"
+  "mark": {
+    "type": "area",
+    "interpolate": "monotone"
   },
-  "y": {
-    "aggregate": "sum",
-    "field": "tree_cover_loss_ha",
-    "type": "quantitative",
-    "title": "Tree Cover Lost (hectares)",
-    "stack": true
-  },
-  "color": {
-    "field": "loss drivers",
-    "type": "nominal",
-    "title": "Driver",
-    "scale": {
-      "scheme": "tableau10"
+  "encoding": {
+    "x": {
+      "field": "year",
+      "type": "quantitative",
+      "title": "Year",
+      "axis": {
+        "format": "d",
+        "values": [2001, 2005, 2010, 2015, 2020, 2024],
+        "labelAngle": 0
+      }
     },
-    "sort": {
-      "field": "tree_cover_loss_ha",
-      "op": "sum",
-      "order": "ascending"
-    }
-  },
-  "order": {
-    "aggregate": "sum",
-    "field": "tree_cover_loss_ha",
-    "type": "quantitative",
-    "sort": "descending"
-  },
-  "opacity": {
-    "condition": {
-      "param": "driver",
-      "value": 1
+    "y": {
+      "field": "total_loss_ha",
+      "type": "quantitative",
+      "title": "Tree Cover Lost (hectares)",
+      "stack": true,
+      "axis": {
+        "format": "~s"
+      }
     },
-    "value": 0.18
-  },
+    "color": {
+      "field": "driver_group",
+      "type": "nominal",
+      "title": "Driver",
+      "scale": {
+        "domain": ["Permanent agriculture", "Logging", "Other drivers"],
+        "range": ["#0072B2", "#E69F00", "#999999"]
+      }
+    },
+    "order": {
+      "field": "driver_order",
+      "type": "quantitative"
+    },
+    "opacity": {
+      "condition": {
+        "param": "driver",
+        "value": 1
+      },
+      "value": 0.25
+    },
     "tooltip": [
-      {"field": "year", "type": "ordinal","title": "Year"},
-      {"field": "loss drivers","type": "nominal","title": "Driver"},
-      {"field": "tree_cover_loss_ha","type": "quantitative","title": "Tree Cover Lost (hectares)"}
+      {
+        "field": "year",
+        "type": "quantitative",
+        "title": "Year",
+        "format": "d"
+      },
+      {
+        "field": "driver_group",
+        "type": "nominal",
+        "title": "Driver"
+      },
+      {
+        "field": "total_loss_ha",
+        "type": "quantitative",
+        "title": "Tree Cover Lost (hectares)",
+        "format": ",.0f"
+      }
     ]
   }
 }

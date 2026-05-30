@@ -11,6 +11,49 @@
   --max-width:    1200px;
 }
 
+html {
+  scroll-behavior: smooth;
+}
+
+.top-overhead {
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  background: rgba(26, 58, 42, 0.96);
+  color: white;
+  padding: 14px 28px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid rgba(255,255,255,0.16);
+}
+
+.overhead-title {
+  font-family: var(--display_font);
+  font-size: 18px;
+  font-weight: 700;
+  letter-spacing: 0.3px;
+}
+
+.overhead-links {
+  display: flex;
+  gap: 18px;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+}
+
+.overhead-links a {
+  color: rgba(255,255,255,0.78);
+  text-decoration: none;
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 0.2px;
+}
+
+.overhead-links a:hover {
+  color: var(--amber);
+}
+
 .hero {
   background: var(--green_dark);
   color: #fff;
@@ -65,30 +108,44 @@
 .section {
   padding: 36px 0 24px;
   border-bottom: 1px solid rgba(0,0,0,0.08);
-  text-align: center;
+  text-align: left;
 }
 
-.section h2 {
+.section-kicker {
   font-family: var(--display_font);
-  font-size: 25px;
+  font-size: 30px;
   font-weight: 700;
   line-height: 1.25;
   margin-bottom: 12px;
   color: var(--green_dark);
+  text-align: left;
 }
+
 .section-intro {
-  font-size: 12px;
+  font-size: 14px;
   color: var(--text_muted);
-  margin-bottom: 36px;
-  text-align: center;
+  max-width: 620px;
+  line-height: 1.7;
+  text-align: left;
+}
+
+.chart-caption,
+.text-box p,
+.callout {
+  max-width: 620px;
+  line-height: 1.7;
+}
+
+.text-box p {
+  text-align: left;
 }
 
 .chart-box {
-  background: #ffeeee;
-  border-radius: 10px;
-  padding: 24px;
-  box-shadow: 0 1px 4px rgba(0,0,0,0.06);
-  margin-bottom: 24px;
+  background: #ffffff;
+  border-radius: 14px;
+  padding: 28px 28px 32px;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.06);
+  margin-bottom: 32px;
 }
 
 .chart-box-left  { margin-right: 12px; }
@@ -96,38 +153,38 @@
 
 .chart-title {
   font-family: var(--display_font);
-  font-size: 1rem;
+  font-size: 16;
   font-weight: 700;
   color: var(--green_dark);
-  margin: 0 0 4px;
+  margin: 0 0 12px;
 }
 .chart-caption {
   font-size: 12px;
   color: var(--text_muted);
-  margin: 0 0 16px;
-  line-height: 1.5;
+  margin: 0 auto 22px;
+  line-height: 1.6;
 }
 
 .text-box {
-  border-radius: 10px;
+  background: #ffffff;
+  border-radius: 14px;
   padding: 24px;
-  box-shadow: 0 1px 4px rgba(0,0,0,0.06);
-  margin-bottom: 24px;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.06);
+  margin-bottom: 32px;
   margin-left: 12px;
-  height: 100%;
 }
 
 .text-box h3 {
-  font-family: var(--font-display);
+  font-family: var(--display_font);
   font-size: 24px;
   font-weight: 700;
-  color: var(--green-dark);
+  color: var(--green_dark);
   margin: 0 0 12px;
 }
 
 .text-box p {
   font-size: 15px;
-  color: var(--text-muted);
+  color: var(--text_muted);
   margin: 0 0 12px;
   line-height: 1.7;
 }
@@ -138,15 +195,38 @@
    Callout
 ══════════════════════════════════════ */
 .callout {
-  background: white;
-  border-left: 4px solid var(--green_light);
-  border-radius: 0 8px 8px 0;
-  padding: 16px 20px;
-  margin: 8px 0 24px;
-  font-size: 0.95rem;
+  max-width: 760px;
+  margin: 8px auto 32px;
+  padding: 18px 22px;
+  border-radius: 14px;
+  text-align: left;
+  line-height: 1.7;
+  font-size: 14px;
   color: var(--primary_text);
+  box-shadow: 0 2px 10px rgba(0,0,0,0.05);
 }
-.callout strong { color: var(--green_dark); }
+
+.callout strong {
+  font-family: var(--display_font);
+  font-size: 18px;
+  color: var(--green_dark);
+  margin-bottom: 6px;
+}
+
+.callout-note {
+  background: #f7f2e8;
+  border-left: 5px solid #d8b365;
+}
+
+.callout-insight {
+  background: #eef6f7;
+  border-left: 5px solid #5ab4ac;
+}
+
+.callout-warning {
+  background: #f6eef7;
+  border-left: 5px solid #9e9ac8;
+}
 
 /* ══════════════════════════════════════
    Footer
@@ -163,27 +243,19 @@ footer {
 footer a { color: var(--green_light); text-decoration: none; }
 footer strong { color: white; }
 
-#chart_1 {
+#chart_1,
+#chart_2,
+#chart_3,
+#chart_4,
+#chart_5,
+#chart_6,
+#chart_7,
+#chart_8,
+#chart_9,
+#chart_10{
   width: 100%;
 }
-#chart_2 {
-  width: 100%;
-}
-#chart_3 {
-  width: 100%;
-}
-#chart_4 {
-  width: 100%;
-}
-#chart_5 {
-  width: 100%;
-}
-#chart_6 {
-  width: 100%;
-}
-#chart_7 {
-  width: 100%;
-}
-#chart_8 {
-  width: 100%;
+
+.vega-embed {
+  margin-top: 12px;
 }

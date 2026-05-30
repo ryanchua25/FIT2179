@@ -1,39 +1,150 @@
 {
   "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
-  "width": 300,
-  "height": 300,
+  "width": 360,
+  "height": 360,
   "title": "EFT Spending Accountability, 2019–2024",
   "data": {
     "url": "https://raw.githubusercontent.com/ryanchua25/FIT2179/main/data/EFT_spending.csv"
   },
-  "params": [
+  "transform": [
     {
-      "name": "spending_select",
-      "select": {"type": "point", "fields": ["documented spending category"]},
-      "bind": "legend"
+      "calculate": "toNumber(datum['EFT funding spent (RM, Million)'])",
+      "as": "amount"
+    },
+    {
+      "joinaggregate": [
+        {
+          "op": "sum",
+          "field": "amount",
+          "as": "total_funding"
+        }
+      ]
+    },
+    {
+      "calculate": "datum.amount / datum.total_funding",
+      "as": "percentage"
+    },
+    {
+      "calculate": "format(datum.percentage, '.0%')",
+      "as": "percentage_label"
+    },
+    {
+      "calculate": "datum['documented spending category'] === 'Unknown' ? datum.percentage_label : ''",
+      "as": "main_label"
     }
   ],
-  "mark": {"type": "arc"},
-  "encoding": {
-    "theta": {
-      "field": "EFT funding spent (RM, Million)",
-      "type": "quantitative"
-    },
-    "color": {
-      "field": "documented spending category",
-      "type": "nominal",
-      "title": "Category",
-      "scale": {
-        "scheme": "accent"
+  "layer": [
+    {
+      "mark": {
+        "type": "arc",
+        "innerRadius": 80,
+        "outerRadius": 125
+      },
+      "encoding": {
+        "theta": {
+          "field": "amount",
+          "type": "quantitative"
+        },
+        "color": {
+          "field": "documented spending category",
+          "type": "nominal",
+          "title": "Category",
+          "scale": {
+            "domain": [
+              "Unknown",
+              "Johor",
+              "Sabah",
+              "Pahang",
+              "Kelantan"
+            ],
+            "range": [
+              "#6A51A3",
+              "#9E9AC8",
+              "#D8B365",
+              "#5AB4AC",
+              "#BDBDBD"
+            ]
+          }
+        },
+        "tooltip": [
+          {
+            "field": "documented spending category",
+            "type": "nominal",
+            "title": "Category"
+          },
+          {
+            "field": "amount",
+            "type": "quantitative",
+            "title": "Amount (RM million)",
+            "format": ".1f"
+          },
+          {
+            "field": "percentage",
+            "type": "quantitative",
+            "title": "Share of total",
+            "format": ".1%"
+          }
+        ]
       }
     },
-    "opacity": {
-      "condition": {"param": "spending_select", "value": 1},
-      "value": 0.2
+    {
+      "mark": {
+        "type": "text",
+        "radius": 148,
+        "fontSize": 13,
+        "fontWeight": "bold",
+        "color": "black"
+      },
+      "encoding": {
+        "theta": {
+          "field": "amount",
+          "type": "quantitative"
+        },
+        "text": {
+          "field": "main_label",
+          "type": "nominal"
+        }
+      }
     },
-    "tooltip": [
-      {"field": "documented spending category", "type": "nominal", "title": "Category"},
-      {"field": "EFT funding spent (RM, Million)", "type": "quantitative", "title": "Amount (RM million)"}
-    ]
-  }
+    {
+      "transform": [
+        {
+          "aggregate": [
+            {
+              "op": "sum",
+              "field": "amount",
+              "as": "total_funding"
+            }
+          ]
+        }
+      ],
+      "mark": {
+        "type": "text",
+        "fontSize": 26,
+        "fontWeight": "bold",
+        "color": "black",
+        "dy": -8
+      },
+      "encoding": {
+        "text": {
+          "field": "total_funding",
+          "type": "quantitative",
+          "format": ",.0f"
+        }
+      }
+    },
+    {
+      "mark": {
+        "type": "text",
+        "fontSize": 11,
+        "color": "#555555",
+        "dy": 18
+      },
+      "encoding": {
+        "text": {
+          "value": "RM million total"
+        }
+      }
+    }
+  ]
 }
