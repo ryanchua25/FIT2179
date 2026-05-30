@@ -188,6 +188,8 @@ html {
 
 .text-box p:last-child { margin-bottom: 0; }
 
+
+
 .callout {
   max-width: 760px;
   margin: 8px auto 32px;
@@ -195,14 +197,14 @@ html {
   border-radius: 14px;
   text-align: left;
   line-height: 1.7;
-  font-size: 14px;
+  font-size: 16px;
   color: var(--primary_text);
   box-shadow: 0 2px 10px rgba(0,0,0,0.05);
 }
 
 .callout strong {
   font-family: var(--display_font);
-  font-size: 18px;
+  font-size: 20px;
   color: var(--green_dark);
   margin-bottom: 6px;
 }

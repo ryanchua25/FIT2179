@@ -22,7 +22,7 @@
     "type": "point",
     "filled": true,
     "size": 120,
-    "opacity": 0.8
+    "opacity": 0.85
   },
   "encoding": {
     "x": {
@@ -39,11 +39,46 @@
       "title": "EFT Funds (RM million)"
     },
     "color": {
-      "condition": {
-        "test": "datum.State === 'Sabah' || datum.State === 'Sarawak'",
-        "value":"#E69F00"
+      "field": "State",
+      "type": "nominal",
+      "title": "State",
+      "scale": {
+        "domain": [
+          "Johor",
+          "Kedah",
+          "Kelantan",
+          "Malacca",
+          "Negeri Sembilan",
+          "Pahang",
+          "Penang",
+          "Perak",
+          "Perlis",
+          "Sabah",
+          "Sarawak",
+          "Selangor",
+          "Terengganu"
+        ],
+        "range": [
+          "#0072B2",
+          "#E69F00",
+          "#CC79A7",
+          "#56B4E9",
+          "#D8B365",
+          "#6A51A3",
+          "#80CDC1",
+          "#8C6D31",
+          "#A6CEE3",
+          "#FDBF6F",
+          "#9E9AC8",
+          "#BDBDBD",
+          "#1F78B4"
+        ]
       },
-      "value": "#0072B2"
+      "legend": {
+        "orient": "right",
+        "columns": 1,
+        "symbolLimit": 20
+      }
     },
     "tooltip": [
       {
