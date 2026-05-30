@@ -96,9 +96,6 @@ html {
   margin-top: 8px;
 }
 
-/* ══════════════════════════════════════
-   Page wrapper
-══════════════════════════════════════ */
 .page {
   max-width: var(--max-width);
   margin: 0 auto;
@@ -153,7 +150,7 @@ html {
 
 .chart-title {
   font-family: var(--display_font);
-  font-size: 16;
+  font-size: 16px;
   font-weight: 700;
   color: var(--green_dark);
   margin: 0 0 12px;
@@ -191,9 +188,6 @@ html {
 
 .text-box p:last-child { margin-bottom: 0; }
 
-/* ══════════════════════════════════════
-   Callout
-══════════════════════════════════════ */
 .callout {
   max-width: 760px;
   margin: 8px auto 32px;
@@ -228,9 +222,6 @@ html {
   border-left: 5px solid #9e9ac8;
 }
 
-/* ══════════════════════════════════════
-   Footer
-══════════════════════════════════════ */
 footer {
   background: var(--green_dark);
   color: grey;
