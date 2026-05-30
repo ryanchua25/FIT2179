@@ -1,7 +1,7 @@
 {
   "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
   "width": "container",
-  "height": 300,
+  "height": 330,
   "title": "Forest Loss vs. EFT Funding by State",
   "data": {
     "url": "https://raw.githubusercontent.com/ryanchua25/FIT2179/main/data/EFT_state.csv"
@@ -16,87 +16,127 @@
         "key": "State",
         "fields": ["total_loss_ha"]
       }
+    },
+    {
+      "calculate": "toNumber(datum.total_loss_ha)",
+      "as": "loss_num"
+    },
+    {
+      "calculate": "toNumber(datum['2019-2024 EFT funds (RM, Million)'])",
+      "as": "funding_num"
+    },
+    {
+      "filter": "isValid(datum.loss_num) && isValid(datum.funding_num)"
     }
   ],
-  "mark": {
-    "type": "point",
-    "filled": true,
-    "size": 120,
-    "opacity": 0.85
-  },
-  "encoding": {
-    "x": {
-      "field": "total_loss_ha",
-      "type": "quantitative",
-      "title": "Total Tree Cover Loss (ha)",
-      "axis": {
-        "format": "~s"
-      }
-    },
-    "y": {
-      "field": "2019-2024 EFT funds (RM, Million)",
-      "type": "quantitative",
-      "title": "EFT Funds (RM million)"
-    },
-    "color": {
-      "field": "State",
-      "type": "nominal",
-      "title": "State",
-      "scale": {
-        "domain": [
-          "Johor",
-          "Kedah",
-          "Kelantan",
-          "Malacca",
-          "Negeri Sembilan",
-          "Pahang",
-          "Penang",
-          "Perak",
-          "Perlis",
-          "Sabah",
-          "Sarawak",
-          "Selangor",
-          "Terengganu"
-        ],
-        "range": [
-          "#0072B2",
-          "#E69F00",
-          "#CC79A7",
-          "#56B4E9",
-          "#D8B365",
-          "#6A51A3",
-          "#80CDC1",
-          "#8C6D31",
-          "#A6CEE3",
-          "#FDBF6F",
-          "#9E9AC8",
-          "#BDBDBD",
-          "#1F78B4"
+  "layer": [
+    {
+      "mark": {
+        "type": "point",
+        "filled": true,
+        "size": 120,
+        "opacity": 0.85
+      },
+      "encoding": {
+        "x": {
+          "field": "loss_num",
+          "type": "quantitative",
+          "title": "Total Tree Cover Loss (ha)",
+          "axis": {
+            "format": "~s"
+          }
+        },
+        "y": {
+          "field": "funding_num",
+          "type": "quantitative",
+          "title": "EFT Funds (RM million)"
+        },
+        "color": {
+          "field": "State",
+          "type": "nominal",
+          "title": "State",
+          "scale": {
+            "domain": [
+              "Johor",
+              "Kedah",
+              "Kelantan",
+              "Malacca",
+              "Negeri Sembilan",
+              "Pahang",
+              "Penang",
+              "Perak",
+              "Perlis",
+              "Sabah",
+              "Sarawak",
+              "Selangor",
+              "Terengganu"
+            ],
+            "range": [
+              "#0072B2",
+              "#E69F00",
+              "#CC79A7",
+              "#56B4E9",
+              "#D8B365",
+              "#6A51A3",
+              "#80CDC1",
+              "#8C6D31",
+              "#A6CEE3",
+              "#FDBF6F",
+              "#9E9AC8",
+              "#BDBDBD",
+              "#1F78B4"
+            ]
+          },
+          "legend": {
+            "orient": "right",
+            "columns": 1,
+            "symbolLimit": 20
+          }
+        },
+        "tooltip": [
+          {
+            "field": "State",
+            "type": "nominal",
+            "title": "State"
+          },
+          {
+            "field": "loss_num",
+            "type": "quantitative",
+            "title": "Tree Cover Loss (ha)",
+            "format": ",.0f"
+          },
+          {
+            "field": "funding_num",
+            "type": "quantitative",
+            "title": "EFT Funds (RM million)"
+          }
         ]
-      },
-      "legend": {
-        "orient": "right",
-        "columns": 1,
-        "symbolLimit": 20
       }
     },
-    "tooltip": [
-      {
-        "field": "State",
-        "type": "nominal",
-        "title": "State"
+    {
+      "transform": [
+        {
+          "regression": "funding_num",
+          "on": "loss_num",
+          "as": ["loss_num", "funding_trend"]
+        }
+      ],
+      "mark": {
+        "type": "line",
+        "color": "black",
+        "strokeWidth": 1,
+        "strokeDash": [6, 4]
       },
-      {
-        "field": "total_loss_ha",
-        "type": "quantitative",
-        "title": "Tree Cover Loss (ha)",
-        "format": ",.0f"
-      },
-      {
-        "field": "2019-2024 EFT funds (RM, Million)",
-        "type": "quantitative",
-        "title": "EFT Funds (RM million)"
+      "encoding": {
+        "x": {
+          "field": "loss_num",
+          "type": "quantitative"
+        },
+        "y": {
+          "field": "funding_trend",
+          "type": "quantitative"
+        }
       }
-    ]
-  }
+    }
+  ]
 }

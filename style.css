@@ -191,7 +191,7 @@ html {
 
 
 .callout {
-  max-width: 760px;
+  max-width: 650px;
   margin: 8px auto 32px;
   padding: 18px 22px;
   border-radius: 14px;
@@ -209,15 +209,6 @@ html {
   margin-bottom: 6px;
 }
 
-.callout-note {
-  background: #f7f2e8;
-  border-left: 5px solid #d8b365;
-}
-
-.callout-insight {
-  background: #eef6f7;
-  border-left: 5px solid #5ab4ac;
-}
 
 .callout-warning {
   background: #f6eef7;
