@@ -44,12 +44,18 @@
           "title": "Total Tree Cover Loss (ha)",
           "axis": {
             "format": "~s"
+          },
+          "scale": {
+            "zero": true
           }
         },
         "y": {
           "field": "funding_num",
           "type": "quantitative",
-          "title": "EFT Funds (RM million)"
+          "title": "EFT Funds (RM million)",
+          "scale": {
+            "zero": true
+          }
         },
         "color": {
           "field": "State",
@@ -124,7 +130,7 @@
       "mark": {
         "type": "line",
         "color": "black",
-        "strokeWidth": 1,
+        "strokeWidth": 1.4,
         "strokeDash": [6, 4]
       },
       "encoding": {
@@ -137,6 +143,113 @@
           "type": "quantitative"
         }
       }
+    },
+    {
+      "data": {
+        "values": [
+          {
+            "loss_label_x": 300000,
+            "funding_label_y": 82,
+            "label": "Above trend: relatively more funding"
+          }
+        ]
+      },
+      "mark": {
+        "type": "text",
+        "align": "left",
+        "fontSize": 12,
+        "fontWeight": "bold",
+        "color": "#333333",
+        "dx": 4,
+        "dy": -4
+      },
+      "encoding": {
+        "x": {
+          "field": "loss_label_x",
+          "type": "quantitative"
+        },
+        "y": {
+          "field": "funding_label_y",
+          "type": "quantitative"
+        },
+        "text": {
+          "field": "label",
+          "type": "nominal"
+        }
+      }
+    },
+    {
+      "data": {
+        "values": [
+          {
+            "loss_label_x": 1450000,
+            "funding_label_y": 22,
+            "label": "Below trend: relatively less funding"
+          }
+        ]
+      },
+      "mark": {
+        "type": "text",
+        "align": "left",
+        "fontSize": 12,
+        "fontWeight": "bold",
+        "color": "#333333",
+        "dx": 4,
+        "dy": 6
+      },
+      "encoding": {
+        "x": {
+          "field": "loss_label_x",
+          "type": "quantitative"
+        },
+        "y": {
+          "field": "funding_label_y",
+          "type": "quantitative"
+        },
+        "text": {
+          "field": "label",
+          "type": "nominal"
+        }
+      }
+    },
+    {
+      "data": {
+        "values": [
+          {
+            "loss_label_x": 2300000,
+            "funding_label_y": 72,
+            "label": "Dashed line shows overall funding pattern"
+          }
+        ]
+      },
+      "mark": {
+        "type": "text",
+        "align": "left",
+        "fontSize": 11,
+        "fontStyle": "italic",
+        "color": "#555555",
+        "dx": 4,
+        "dy": -4
+      },
+      "encoding": {
+        "x": {
+          "field": "loss_label_x",
+          "type": "quantitative"
+        },
+        "y": {
+          "field": "funding_label_y",
+          "type": "quantitative"
+        },
+        "text": {
+          "field": "label",
+          "type": "nominal"
+        }
+      }
     }
-  ]
+  ],
+  "config": {
+    "view": {
+      "stroke": null
+    }
+  }
 }

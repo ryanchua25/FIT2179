@@ -6,29 +6,75 @@
   "data": {
     "url": "https://raw.githubusercontent.com/ryanchua25/FIT2179/main/data/asean_forest_coverage.csv"
   },
-  "mark": "bar",
-  "encoding": {
-    "x": {
-      "field": "Forest_pct",
-      "type": "quantitative",
-      "title": "Forest Area (% of land)",
-      "scale": {"domain": [0, 100]}
+  "transform": [
+    {
+      "calculate": "datum.Country === 'Malaysia' ? format(datum.Forest_pct, '.1f') + '%' : ''",
+      "as": "malaysia_label"
+    }
+  ],
+  "layer": [
+    {
+      "mark": "bar",
+      "encoding": {
+        "x": {
+          "field": "Forest_pct",
+          "type": "quantitative",
+          "title": "Forest Area (% of land)",
+          "scale": {
+            "domain": [0, 100]
+          }
+        },
+        "y": {
+          "field": "Country",
+          "type": "nominal",
+          "sort": "-x",
+          "title": null
+        },
+        "color": {
+          "condition": {
+            "test": "datum.Country === 'Malaysia'",
+            "value": "#E69F00"
+          },
+          "value": "#9ECAE1"
+        },
+        "tooltip": [
+          {
+            "field": "Country",
+            "type": "nominal"
+          },
+          {
+            "field": "Forest_pct",
+            "type": "quantitative",
+            "title": "Forest Cover (%)",
+            "format": ".1f"
+          }
+        ]
+      }
     },
-    "y": {
-      "field": "Country",
-      "type": "nominal",
-      "sort": "-x",
-      "title": null
-    },
-    "color": {
-      "condition": {
-        "test": "datum.Country === 'Malaysia'",
-        "value": "#E69F00"},
-      "value": "#9ECAE1"
-    },
-    "tooltip": [
-      {"field": "Country", "type": "nominal"},
-      {"field": "Forest_pct", "type": "quantitative", "title": "Forest Cover (%)", "format": ".1f"}
-    ]
-  }
+    {
+      "mark": {
+        "type": "text",
+        "align": "left",
+        "dx": 6,
+        "fontSize": 12,
+        "fontWeight": "bold",
+        "color": "#333333"
+      },
+      "encoding": {
+        "x": {
+          "field": "Forest_pct",
+          "type": "quantitative"
+        },
+        "y": {
+          "field": "Country",
+          "type": "nominal",
+          "sort": "-x"
+        },
+        "text": {
+          "field": "malaysia_label",
+          "type": "nominal"
+        }
+      }
+    }
+  ]
 }
